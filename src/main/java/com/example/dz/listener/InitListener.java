@@ -14,11 +14,11 @@ public class InitListener {
 
     @EventListener(ApplicationReadyEvent.class)
     public void runJobsInit() {
-//        testService.testMethodSync();
-//        testService.testMethodSync();
-//        testService.testMethodSync();
-//        testService.testMethodAsync();
-//        testService.testMethodAsync();
-//        testService.testMethodAsync();
+        testService.testMethodSync();
+        testService.testMethodSync();
+        testService.testMethodSync();
+        testService.testMethodAsync();
+        testService.testMethodAsync();
+        testService.testMethodAsync();
     }
 }
