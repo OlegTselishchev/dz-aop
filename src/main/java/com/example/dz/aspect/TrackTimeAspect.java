@@ -37,8 +37,7 @@ public class TrackTimeAspect {
 
             TrackTimeModel trackTimeModel = new TrackTimeModel();
             trackTimeModel.setIsAsync(false);
-            trackTimeModel.setMethodPath(joinPoint.getSignature().getDeclaringTypeName());
-            trackTimeModel.setMethodName(joinPoint.getSignature().getName());
+            trackTimeModel.setMethodName(joinPoint.getSignature().toLongString());
             trackTimeModel.setTimeWork((int)result);
             trackTimeService.save(trackTimeModel);
         } catch (Exception e) {

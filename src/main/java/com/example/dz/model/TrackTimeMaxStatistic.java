@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TrackTimeMaxStatistic {
     private Boolean isAsync;
-    private String methodPath;
     private String methodName;
     private Integer maxTimeWork;
 }

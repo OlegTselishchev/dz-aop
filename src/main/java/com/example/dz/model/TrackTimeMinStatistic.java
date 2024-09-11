@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TrackTimeMinStatistic {
     private Boolean isAsync;
-    private String methodPath;
     private String methodName;
     private Integer minTimeWork;
 }

@@ -27,9 +27,7 @@ public class TrackTimeModel {
     private Integer id;
     @Column(name = "is_async")
     private Boolean isAsync;
-    @Column(name = "path")
-    private String methodPath;
-    @Column(name = "name")
+    @Column(name = "path_name")
     private String methodName;
     @Column(name = "time_work")
     private Integer timeWork;

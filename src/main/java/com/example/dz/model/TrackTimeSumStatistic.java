@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TrackTimeSumStatistic {
     private Boolean isAsync;
-    private String methodPath;
     private String methodName;
     private Long sumTimeWork;
 }
