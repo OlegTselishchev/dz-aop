@@ -1,27 +1,21 @@
 package com.example.dz.aspect;
 
-import com.example.dz.model.TrackTimeModel;
-import com.example.dz.service.TrackTimeStatisticService;
+import com.example.dz.service.TrackTimeService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
+@RequiredArgsConstructor
 @Component
 @Aspect
 @Slf4j
 public class TrackTimeAspect {
 
-    private final TrackTimeStatisticService trackTimeService;
-
-    @Autowired
-    public TrackTimeAspect(TrackTimeStatisticService trackTimeService) {
-        this.trackTimeService = trackTimeService;
-    }
+    private final TrackTimeService trackTimeServiceSync;
 
     @Pointcut("@annotation(com.example.dz.annotation.TrackTime)")
     public void trackTimePointcut() { }
@@ -31,19 +25,9 @@ public class TrackTimeAspect {
         try {
             long start = System.currentTimeMillis();
             joinPoint.proceed();
-            long result = System.currentTimeMillis() - start;
-
-            log.info("INTO DB mName: " + joinPoint.getSignature().getName() + " TIME: " + result);
-
-            TrackTimeModel trackTimeModel = new TrackTimeModel();
-            trackTimeModel.setIsAsync(false);
-            trackTimeModel.setMethodName(joinPoint.getSignature().toLongString());
-            trackTimeModel.setTimeWork((int)result);
-            trackTimeService.save(trackTimeModel);
+            trackTimeServiceSync.trackTime(start, joinPoint.getSignature().toLongString());
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
-
     }
-
 }

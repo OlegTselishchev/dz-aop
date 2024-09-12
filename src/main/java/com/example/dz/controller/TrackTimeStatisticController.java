@@ -1,50 +1,46 @@
 package com.example.dz.controller;
 
-import com.example.dz.model.TrackTimeAvgStatistic;
-import com.example.dz.model.TrackTimeMaxStatistic;
-import com.example.dz.model.TrackTimeMinStatistic;
-import com.example.dz.model.TrackTimeSumStatistic;
-import com.example.dz.service.TrackTimeStatisticService;
+import com.example.dz.model.AvgStatisticResponse;
+import com.example.dz.model.MaxStatisticResponse;
+import com.example.dz.model.MinStatisticResponse;
+import com.example.dz.model.SumStatisticResponse;
+import com.example.dz.service.StatisticService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/rest/statistic")
+@RequestMapping(value = "/v1/rest/statistic")
 public class TrackTimeStatisticController {
 
-    private final TrackTimeStatisticService trackTimeService;
-
-    @Autowired
-    public TrackTimeStatisticController(TrackTimeStatisticService trackTimeService) {
-        this.trackTimeService = trackTimeService;
-    }
+    private final StatisticService statisticService;
 
     @Operation(description = "Get min work time.")
     @GetMapping("/min")
-    public List<TrackTimeMinStatistic> getMinTime() {
-        return trackTimeService.findMinTrackTime();
+    public List<MinStatisticResponse> getMinTime() {
+        return statisticService.findMinTrackTime();
     }
 
     @Operation(description = "Get max work time..")
     @GetMapping("/max")
-    public List<TrackTimeMaxStatistic> getMaxTime() {
-        return trackTimeService.findMaxTrackTime();
+    public List<MaxStatisticResponse> getMaxTime() {
+        return statisticService.findMaxTrackTime();
     }
 
     @Operation(description = "Get sum work time..")
     @GetMapping("/sum")
-    public List<TrackTimeSumStatistic> getSumTime() {
-        return trackTimeService.findSumTrackTime();
+    public List<SumStatisticResponse> getSumTime() {
+        return statisticService.findSumTrackTime();
     }
 
     @Operation(description = "Get avg work time..")
     @GetMapping("/avg")
-    public List<TrackTimeAvgStatistic> getAvgTime() {
-        return trackTimeService.findAvgTrackTime();
+    public List<AvgStatisticResponse> getAvgTime() {
+        return statisticService.findAvgTrackTime();
     }
 }
